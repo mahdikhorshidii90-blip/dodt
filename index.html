@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>یه چیز کوچولو 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Tahoma, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 10% 20%, #ffd8e8 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, #ddd9ff 0%, transparent 30%),
+        linear-gradient(135deg, #fff5f8, #f1efff);
+}
+
+.card {
+    width: min(92%, 500px);
+    min-height: 400px;
+    padding: 40px 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 30px;
+
+    box-shadow: 0 20px 70px rgba(80,50,100,.15);
+
+    animation: show .7s ease;
+}
+
+.emoji {
+    font-size: 58px;
+    margin-bottom: 15px;
+    animation: float 2s infinite ease-in-out;
+}
+
+h1 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+p {
+    color: #777;
+    line-height: 1.8;
+}
+
+.buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+button {
+    border: none;
+    padding: 15px 12px;
+    border-radius: 17px;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+.option {
+    background: white;
+    color: #444;
+    box-shadow: 0 7px 20px rgba(0,0,0,.08);
+}
+
+.option:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,.13);
+}
+
+.primary {
+    background: linear-gradient(135deg,#ff5183,#ff326c);
+    color: white;
+    box-shadow: 0 8px 20px rgba(255,50,108,.25);
+}
+
+.back {
+    margin-top: 18px;
+    background: transparent;
+    color: #999;
+    font-size: 13px;
+}
+
+.hidden {
+    display: none;
+}
+
+.selected {
+    transform: scale(1.03);
+    outline: 3px solid #ff83a5;
+    background: #fff2f6;
+}
+
+.final-heart {
+    font-size: 75px;
+    margin-bottom: 20px;
+    animation: float 2s infinite ease-in-out;
+}
+
+.final h1 {
+    color: #ff4779;
+}
+
+.small {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@media(max-width:500px) {
+    .card {
+        min-height: 380px;
+        padding: 35px 18px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    button {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- مرحله اول -->
+<div class="card" id="step1">
+
+    <div class="emoji">💗</div>
+
+    <h1>با من دوست میشی؟ 🥺</h1>
+
+    <p>
+        یه سؤال کوچولو دارم...
+    </p>
+
+    <div class="buttons">
+
+        <button class="primary" onclick="nextStep(2)">
+            آره ❤️
+        </button>
+
+        <button class="option" id="noBtn" onclick="sayNo()">
+            نه 😐
+        </button>
+
+    </div>
+</div>
+
+
+<!-- مرحله دوم -->
+<div class="card hidden" id="step2">
+
+    <div class="emoji">🌸</div>
+
+    <h1>خب خب... 😄</h1>
+
+    <p>
+        حالا که گفتی آره،<br>
+        یه انتخاب مهم دیگه داریم!
+    </p>
+
+    <p style="margin-top:15px;">
+        اولین قرار دوستانه‌مون کجا باشه؟
+    </p>
+
+    <div class="buttons">
+
+        <button class="option" onclick="choose(this, 'کافه ☕')">
+            ☕ کافه
+        </button>
+
+        <button class="option" onclick="choose(this, 'پارک 🌳')">
+            🌳 پارک
+        </button>
+
+        <button class="option" onclick="choose(this, 'سینما 🎬')">
+            🎬 سینما
+        </button>
+
+        <button class="option" onclick="choose(this, 'یه جای خاص ✨')">
+            ✨ یه جای خاص
+        </button>
+
+    </div>
+
+    <button class="back" onclick="backStep(1)">
+        ← برگردیم
+    </button>
+
+</div>
+
+
+<!-- مرحله سوم -->
+<div class="card hidden" id="step3">
+
+    <div class="emoji">🍕</div>
+
+    <h1>حالا یه چیز مهم‌تر! 😌</h1>
+
+    <p>
+        بعدش چی بخوریم؟
+    </p>
+
+    <div class="buttons">
+
+        <button class="option" onclick="choose(this, 'پیتزا 🍕')">
+            🍕 پیتزا
+        </button>
+
+        <button class="option" onclick="choose(this, 'بستنی 🍦')">
+            🍦 بستنی
+        </button>
+
+        <button class="option" onclick="choose(this, 'کیک و قهوه 🍰')">
+            🍰 کیک و قهوه
+        </button>
+
+        <button class="option" onclick="choose(this, 'هرچی تو دوست داری 😋')">
+            😋 هرچی تو دوست داری
+        </button>
+
+    </div>
+
+    <button class="back" onclick="backStep(2)">
+        ← انتخاب قبلی
+    </button>
+
+</div>
+
+
+<!-- مرحله چهارم -->
+<div class="card hidden" id="step4">
+
+    <div class="emoji">✨</div>
+
+    <h1>و یه سؤال آخر...</h1>
+
+    <p>
+        دوست داری این روز چه حال‌وهوایی داشته باشه؟
+    </p>
+
+    <div class="buttons">
+
+        <button class="option" onclick="choose(this, 'کلی خنده 😂')">
+            😂 کلی خنده
+        </button>
+
+        <button class="option" onclick="choose(this, 'آروم و قشنگ 🌷')">
+            🌷 آروم و قشنگ
+        </button>
+
+        <button class="option" onclick="choose(this, 'یه ماجراجویی کوچیک 🗺️')">
+            🗺️ ماجراجویی
+        </button>
+
+        <button class="option" onclick="choose(this, 'هرچی پیش اومد 😄')">
+            😄 هرچی پیش اومد
+        </button>
+
+    </div>
+
+    <button class="back" onclick="backStep(3)">
+        ← انتخاب قبلی
+    </button>
+
+</div>
+
+
+<!-- صفحه نهایی -->
+<div class="card hidden final" id="step5">
+
+    <div class="final-heart">🥹💗</div>
+
+    <h1>پس قرارمون شد! 🌸</h1>
+
+    <p id="summary"></p>
+
+    <p style="margin-top:20px;">
+        راستش فقط می‌خواستم یه بهونه پیدا کنم
+        که بیشتر باهات آشنا بشم. 😊
+    </p>
+
+    <p class="small">
+        ممنون که تا آخر این بازی کوچولو اومدی ❤️
+    </p>
+
+</div>
+
+
+<script>
+
+let choices = {
+    place: "",
+    food: "",
+    mood: ""
+};
+
+let noClicks = 0;
+
+function hideAll() {
+
+    document.querySelectorAll(".card").forEach(card => {
+        card.classList.add("hidden");
+    });
+}
+
+function nextStep(step) {
+
+    hideAll();
+
+    document.getElementById("step" + step)
+        .classList.remove("hidden");
+}
+
+function backStep(step) {
+
+    hideAll();
+
+    document.getElementById("step" + step)
+        .classList.remove("hidden");
+}
+
+function sayNo() {
+
+    const btn = document.getElementById("noBtn");
+
+    noClicks++;
+
+    if(noClicks === 1) {
+
+        btn.style.transform = "scale(.75)";
+        btn.innerText = "مطمئنی؟ 🥺";
+
+    } else if(noClicks === 2) {
+
+        btn.style.transform = "scale(.5)";
+        btn.innerText = "یه کم فکر کن 😭";
+
+    } else if(noClicks === 3) {
+
+        btn.style.transform = "scale(.25)";
+        btn.innerText = "نه؟ 😶";
+
+    } else {
+
+        btn.style.opacity = "0";
+        btn.style.transform = "scale(0)";
+        btn.style.pointerEvents = "none";
+    }
+}
+
+function choose(button, value) {
+
+    const currentStep =
+        button.closest(".card").id;
+
+    button.classList.add("selected");
+
+    setTimeout(() => {
+
+        if(currentStep === "step2") {
+
+            choices.place = value;
+            nextStep(3);
+
+        }
+
+        else if(currentStep === "step3") {
+
+            choices.food = value;
+            nextStep(4);
+
+        }
+
+        else if(currentStep === "step4") {
+
+            choices.mood = value;
+            showFinal();
+
+        }
+
+    }, 300);
+}
+
+function showFinal() {
+
+    hideAll();
+
+    const summary =
+        `پس انتخاب‌هامون شد:
+        ${choices.place}،
+        ${choices.food}،
+        با حال‌وهوای ${choices.mood} 😄`;
+
+    document.getElementById("summary").innerText = summary;
+
+    document.getElementById("step5")
+        .classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
+
